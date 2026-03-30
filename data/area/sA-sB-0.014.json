@@ -1,0 +1,79 @@
+{
+  "name": "sA-sB-0.014",
+  "switch_max": 3,
+  "switch_time": 60,
+  "aim_vol": 1320000,
+  "freq_max": 20,
+  "total_time": 24,
+  "start_time_idx": 0,
+  "method": "eco",
+  "unit": [
+    "sA_pump",
+    "sA-sE_pipe",
+    "sE_tank",
+    "sE-sB_pipe",
+    "sB_tank"
+  ],
+  "unit_para": {
+    "sA_pump": {
+      "name": "sA_pump",
+      "type": "pump",
+      "input_waterlevel": 8.2,
+      "output_waterlevel": 65.1,
+      "input_flow": 44.0,
+      "aim_vol": 1,
+      "next_obj": "sA-sE_pipe",
+      "pump_path": "./data/pump_data/sA.json",
+      "weights": 100000.0,
+      "control": 1,
+      "switch_threshold": 0.05,
+      "freq_threshold": 0.02
+    },
+    "sA-sE_pipe": {
+      "name": "sA-sE_pipe",
+      "type": "pipe",
+      "input_waterlevel": 65.1,
+      "input_flow": 44.0,
+      "output_waterlevel": 50.26,
+      "compute_obj": "waterlevel",
+      "next_obj": "sE_tank",
+      "config_path": "./data/pipe_curve/sA-sE.json",
+      "weights": 100000.0
+    },
+    "sE_tank": {
+      "name": "sE_tank",
+      "input_waterlevel": 50.26,
+      "output_waterlevel": 50.26,
+      "output_flow": 39.6,
+      "input_flow": 44.0,
+      "tank_path": "./data/tank_curve/sE.json",
+      "bias_waterlevel": 66.0,
+      "weights": 100000.0,
+      "type": "tank",
+      "delive": 0.2,
+      "sync_flow": 1,
+      "next_obj": "sE-sB_pipe"
+    },
+    "sE-sB_pipe": {
+      "name": "sE-sB_pipe",
+      "type": "pipe",
+      "input_waterlevel": 50.26,
+      "input_flow": 39.6,
+      "output_waterlevel": 40.73,
+      "compute_obj": "waterlevel",
+      "next_obj": "sB_tank",
+      "config_path": "./data/pipe_curve/sE-sB.json",
+      "weights": 100000.0
+    },
+    "sB_tank": {
+      "name": "sB_tank",
+      "input_waterlevel": 39.61,
+      "output_flow": 39.6,
+      "input_flow": 39.6,
+      "tank_path": "./data/tank_curve/sB.json",
+      "bias_waterlevel": 5.5,
+      "weights": 100000.0,
+      "type": "tank"
+    }
+  }
+}
